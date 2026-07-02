@@ -14,6 +14,7 @@ const SECTIONS = [
     id: "education",
     title: "Education",
     hasImage: true,
+    image: "/college.jpg",
     description: "Completed my B.Sc. in Artificial Intelligence and Machine Learning at Sree Saraswathi Thyagaraja College (affiliated with Bharathiar University), building a strong academic foundation in data analytics, database logic, and advanced computing paradigms.",
   },
   {
