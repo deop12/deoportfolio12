@@ -15,7 +15,21 @@ const SECTIONS = [
     title: "Education",
     hasImage: true,
     image: "/college.jpg",
-    description: "Completed my B.Sc. in Artificial Intelligence and Machine Learning at Sree Saraswathi Thyagaraja College (affiliated with Bharathiar University), building a strong academic foundation in data analytics, database logic, and advanced computing paradigms.",
+    items: [
+      {
+        role: "B.Sc. Artificial Intelligence and Machine Learning",
+        company: "Sree Saraswati Thyagaraja College",
+        period: "Completed",
+        location: "Pollachi",
+        details: "Built an academic foundation deeply rooted in data analytics, database logic, and advanced computing paradigms."
+      },
+      {
+        role: "Data Science Specialization",
+        company: "Luminar Technolab",
+        location: "Kochi, Kerala",
+        details: "Acquired industry-level training in analytics workflows, machine learning models, and Python-driven intelligence pipelines."
+      }
+    ]
   },
   {
     id: "experience",
@@ -23,18 +37,24 @@ const SECTIONS = [
     hasImage: false,
     items: [
       {
-        role: "Data Manager and Developer",
+        role: "Data Science Manager and Developer",
         company: "Draw My Career",
-        period: "Jan 2026 – Present",
+        period: "Feb 2026 – Present",
         location: "Mangaluru, Karnataka",
-        details: "Managing vast arrays of student assessment data while actively developing integrated technical features for specialized career counseling pathways."
+        details: [
+          "Analyzed career guidance and assessment data to identify student interests, skills, and career preferences, supporting data-driven decision making.",
+          "Conducted competitor research, data analysis, and report preparation to generate insights for improving career recommendation strategies and platform effectiveness."
+        ]
       },
       {
         role: "Data Science Intern",
         company: "Luminar Technolab",
-        period: "Completed",
+        period: "2024 – 2025",
         location: "Kochi, Kerala",
-        details: "Gained hands-on experience in machine learning pipelines, exploratory data analysis, predictive modeling, and model evaluation techniques."
+        details: [
+          "NLP Development: Designed and implemented NLP models for text classification and sentiment analysis on real-world datasets.",
+          "Data Analysis: Performed exploratory data analysis to uncover patterns within large datasets, helping teams make data driven decisions."
+        ]
       }
     ]
   },
@@ -42,19 +62,30 @@ const SECTIONS = [
     id: "skills",
     title: "Skills",
     hasImage: false,
-    description: "Proficient across Data Management (database design, data storytelling, specific analytical processing) and Development (full-stack web integration, React/Vite ecosystems, Python, SQL, and robust business intelligence environments).",
+    description: "Programming Languages & Libraries: Python (Advanced), Scikit-learn, Pandas, Numpy, TensorFlow, Keras. Core Concepts: Machine Learning, Deep Learning (CNN, RNN), Natural Language Processing (NLP), Linear Regression, Generative AI, Power BI.",
   },
   {
     id: "projects",
     title: "Projects",
     hasImage: false,
-    description: "Spearheaded the technical ecosystem for Draw My Career—an expansive digital platform explicitly dedicated to career assessment, psychometric mapping, and intensive student counseling infrastructure.",
+    items: [
+      {
+        role: "Career Guidance Analytics Platform",
+        company: "Draw My Career",
+        details: "Worked on a data-driven career guidance project focused on helping students make informed career decisions. Collected, cleaned, and analyzed career assessment and user engagement data to identify patterns in interests, skills, and career preferences. Conducted competitor research, data visualization, and insights generation to support career recommendation strategies."
+      },
+      {
+        role: "Real-time Object Detection System",
+        company: "Personal Project",
+        details: "Designed and implemented a real-time object detection system using Convolutional Neural Networks (CNN) to classify 8 distinct categories of objects (buildings, computer, forest, helmet, mouse, smartphone) from a live webcam feed."
+      }
+    ]
   },
   {
     id: "contact",
     title: "Contact",
     hasImage: false,
-    description: "Always open to conversations regarding innovative data platforms and dual-stack development roles. Reach me through my official professional channels below.",
+    description: "Always open to conversations regarding innovative data platforms and machine learning roles. Reach me through my official professional channels below.",
   }
 ];
 
@@ -87,6 +118,12 @@ const Hero = () => {
         <p className="hero-greeting">Hi, it's me</p>
         <h1 className="hero-name">Deo Paulson</h1>
         <h3 className="hero-job">AND, I'M A DATA MANAGER AND DEVELOPER</h3>
+        
+        <div className="hero-btn-wrapper">
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="hero-resume-btn">
+            View Resume
+          </a>
+        </div>
       </motion.div>
     </section>
   );
@@ -114,7 +151,7 @@ const Section = ({ data }) => {
       <div className="section-text">
         <h2>{data.title}</h2>
         {data.description && <p>{data.description}</p>}
-        
+
         {data.items && (
           <div className="items-list">
             {data.items.map((item, idx) => (
@@ -127,9 +164,29 @@ const Section = ({ data }) => {
                   <span className="item-org">{item.company}</span>
                   {item.location && <span className="item-loc"> • {item.location}</span>}
                 </div>
-                {item.details && <p className="item-details">{item.details}</p>}
+                {item.details && (
+                  Array.isArray(item.details) ? (
+                    <ul className="item-details-list">
+                      {item.details.map((detail, dIdx) => (
+                        <li key={dIdx}>{detail}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="item-details">{item.details}</p>
+                  )
+                )}
               </div>
             ))}
+          </div>
+        )}
+        
+        {data.id === 'experience' && (
+          <div className="experience-reference">
+            <h4>Reference</h4>
+            <div className="reference-card">
+              <p className="ref-name">Naveen Paul</p>
+              <p className="ref-title">Co-Founder & C.E.O., Draw My Career</p>
+            </div>
           </div>
         )}
         
@@ -137,7 +194,7 @@ const Section = ({ data }) => {
         
         {data.id === 'contact' && (
           <div className="contact-links">
-            <a href="mailto:#" className="contact-btn"><Mail size={18} /> Email Me</a>
+            <a href="mailto:deopaulson12@gmail.com" className="contact-btn"><Mail size={18} /> Email Me</a>
             <a href="https://www.linkedin.com/in/deo-paulson-728091362" target="_blank" rel="noopener noreferrer" className="contact-btn"><Linkedin size={18} /> LinkedIn</a>
           </div>
         )}
